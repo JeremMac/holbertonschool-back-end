@@ -12,7 +12,7 @@ def to_do(employee_ID):
     list progress based on the employee ID.
 
     Args:
-        input id of the employee.
+        employee_ID (int): The ID of the employee.
 
     Returns:
         None
@@ -21,17 +21,10 @@ def to_do(employee_ID):
         Displays the employee's TODO list progress.
     """
     url = 'https://jsonplaceholder.typicode.com'
-
-    # getting employee's id in user
     employee_url = f"{url}/users/{employee_ID}"
-
-    # getting the tasks linked to this employee's id
     todos_url = f"{url}/todos?userId={employee_ID}"
 
-    # requesting url for employees
     employee_response = requests.get(employee_url)
-
-    # converting into json format
     employee_data = employee_response.json()
 
     if employee_response.status_code == 200:
@@ -44,7 +37,6 @@ def to_do(employee_ID):
         total_tasks = len(todos_data)
         completed_tasks = 0
 
-        # creating the csv file
         csv_path = f"{employee_ID}.csv"
         with open(csv_path, 'w', newline='') as csvfile:
             fieldnames = [
@@ -53,8 +45,6 @@ def to_do(employee_ID):
                 'TASK_COMPLETED_STATUS',
                 'TASK_TITLE'
                 ]
-
-            # writing the datas into csv file.
             writer = csv.DictWriter(csvfile,
                                     fieldnames=fieldnames,
                                     quoting=csv.QUOTE_ALL)
