@@ -48,10 +48,11 @@ def to_do(employee_ID):
             "username": employee_name
         })
 
-    # appending datas into the json file 
+    # appending datas into the json file
     json_path = f"{employee_ID}.json"
     with open(json_path, 'w') as json_file:
         json.dump({str(employee_ID): employee_tasks}, json_file)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
